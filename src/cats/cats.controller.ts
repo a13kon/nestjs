@@ -14,3 +14,14 @@ export class CatsController {
     }
 
 }
+
+@Controller('catss') 
+export class CatsController2 {
+    constructor(private readonly catsService: CatsService) {};
+
+    @Get()
+    catsss() {
+        return 'catss';
+    }
+
+}
