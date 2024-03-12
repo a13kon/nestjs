@@ -4,12 +4,13 @@ import { AppService } from './app.service';
 import { LoggerMiddleware } from './logger.middleware';
 import { BooksModule } from './books/books.module';
 import { BooksController } from './books/books.controller';
+import { UserModule } from './user/user.module';
 
 
 
 
 @Module({
-  imports: [BooksModule],
+  imports: [BooksModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
