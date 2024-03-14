@@ -1,0 +1,6 @@
+services:
+  db:
+    image: mongo
+    container_name: db_mongo
+    ports:
+      - "27017:27017"
