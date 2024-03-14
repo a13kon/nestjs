@@ -4,13 +4,20 @@ import { AppService } from './app.service';
 import { LoggerMiddleware } from './logger.middleware';
 import { BooksModule } from './books/books.module';
 import { BooksController } from './books/books.controller';
-import { UserModule } from './user/user.module';
+
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
+
+
 
 
 
 
 @Module({
-  imports: [BooksModule, UserModule],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_CONNECTION),
+    BooksModule],
   controllers: [AppController],
   providers: [AppService],
 })
