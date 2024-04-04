@@ -1,11 +1,13 @@
-import { Controller, Get, UseInterceptors, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Body, UseInterceptors, Param, ParseIntPipe, Post, UsePipes } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LoggingInterception } from './app.logging.interception';
-//import { ValidationPipe } from './app.validation.pipe';
 import { AppAgeValidationPipe } from './app.ageValidationPipe.pipe';
+import { RegisterDto } from './interfaces/dto/register.dto'
+import { registerSchema } from './validation/schemas/register.schema';
+import { JoiValidationPipe } from './validation/joi.validation.pipe';
 
 @UseInterceptors(LoggingInterception)
-//@UsePipes(ValidationPipe)
+//@UsePipes(ParseIntPipe, AppAgeValidationPipe)
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -22,4 +24,12 @@ export class AppController {
     getAgeInfo(@Param('age', ParseIntPipe, AppAgeValidationPipe) age: string): string {
       return age;
     }
+
+  @UsePipes(new JoiValidationPipe(registerSchema))
+  @Post('/register')
+    register(@Body() body: RegisterDto) {
+      return body;
+    }  
+
 }
+
