@@ -6,12 +6,12 @@ import { RegisterDto } from './interfaces/dto/register.dto'
 import { registerSchema } from './validation/schemas/register.schema';
 import { JoiValidationPipe } from './validation/joi.validation.pipe';
 
-@UseInterceptors(LoggingInterception)
+//@UseInterceptors(LoggingInterception)
 //@UsePipes(ParseIntPipe, AppAgeValidationPipe)
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
+  @UseInterceptors(LoggingInterception)
   @Get()
   getHello(): string {
     if (Math.random() > 0.75) {
