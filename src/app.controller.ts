@@ -5,6 +5,8 @@ import { AppAgeValidationPipe } from './app.ageValidationPipe.pipe';
 import { RegisterDto } from './interfaces/dto/register.dto'
 import { registerSchema } from './validation/schemas/register.schema';
 import { JoiValidationPipe } from './validation/joi.validation.pipe';
+import { LoginDto } from './interfaces/dto/login.dto';
+import { ClValidationPipe } from './validation/cl.validation';
 
 //@UseInterceptors(LoggingInterception)
 //@UsePipes(ParseIntPipe, AppAgeValidationPipe)
@@ -30,6 +32,13 @@ export class AppController {
     register(@Body() body: RegisterDto) {
       return body;
     }  
+
+
+  @UsePipes(new ClValidationPipe())
+  @Post('/login')
+  login(@Body() body: LoginDto){
+    return body;
+  }
 
 }
 
