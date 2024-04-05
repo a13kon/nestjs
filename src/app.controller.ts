@@ -1,4 +1,4 @@
-import { Controller, Get, Body, UseInterceptors, Param, ParseIntPipe, Post, UsePipes } from '@nestjs/common';
+import { Controller, Get, Body, UseInterceptors, Param, ParseIntPipe, Post, UsePipes, HttpException, UseFilters } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LoggingInterception } from './app.logging.interception';
 import { AppAgeValidationPipe } from './app.ageValidationPipe.pipe';
@@ -7,9 +7,11 @@ import { registerSchema } from './validation/schemas/register.schema';
 import { JoiValidationPipe } from './validation/joi.validation.pipe';
 import { LoginDto } from './interfaces/dto/login.dto';
 import { ClValidationPipe } from './validation/cl.validation';
+import { HttpExceptionFilter } from './filters/http.exception.filter';
 
 //@UseInterceptors(LoggingInterception)
 //@UsePipes(ParseIntPipe, AppAgeValidationPipe)
+@UseFilters(HttpExceptionFilter)
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -20,6 +22,13 @@ export class AppController {
       throw new Error ("error");
     }
     return this.appService.getHello();
+  }
+
+  @Get('/error')
+  getError(): string {
+    throw new HttpException('Error!', 401);
+
+    return 'error';
   }
 
   @Get('age/:age') 
