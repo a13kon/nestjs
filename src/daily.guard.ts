@@ -10,7 +10,7 @@ export class DailyGuard implements CanActivate {
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
         const date = new Date;
-        if (date.getHours() > 12) {
+        if (date.getHours() < 12) {
             return true;
         }
         return false;
