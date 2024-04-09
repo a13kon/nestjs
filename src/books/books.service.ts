@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectConnection, InjectModel } from "@nestjs/mongoose";
-import { Book, BookDocument } from "./schemas/book.schema";
+import { Book, BookDocument } from "../interfaces/schemas/book.schema";
 import { Connection, Model } from "mongoose";
-import { CreateBookDto } from "./interfaces/dto/create-book";
-import { UpdateBookDto } from "./interfaces/dto/update-book";
+import { CreateBookDto } from "../interfaces/dto/create-book";
+import { UpdateBookDto } from "../interfaces/dto/update-book";
 
 
 @Injectable()

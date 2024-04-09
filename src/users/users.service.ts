@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { SignupDto } from "./interfaces/dto/signup.dto";
-import { SigninDto } from "./interfaces/dto/signin.dto";
+import { SignupDto } from "../interfaces/dto/signup.dto";
 import { InjectConnection, InjectModel } from "@nestjs/mongoose";
-import { User, UserDocument } from "./mongo/schemas/users.schema";
+import { User, UserDocument } from "../interfaces/schemas/users.schema";
 import { Connection, Model } from "mongoose";
 
 @Injectable()
@@ -19,7 +18,10 @@ export class UsersService {
         return user.save();
     }
 
-    signin(data: SigninDto){
-        return data;
+    async findOne(username: string): Promise<UserDocument> {
+        return this.UserModel.findOne(
+            { email: username }
+        )
     }
+    
 }

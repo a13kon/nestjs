@@ -1,4 +1,4 @@
-import { Controller, Get, Body, UseInterceptors, Param, ParseIntPipe, Post, UsePipes, HttpException, UseFilters, UseGuards } from '@nestjs/common';
+import { Controller, Get, Body, UseInterceptors, Param, ParseIntPipe, Post, UsePipes, HttpException, UseFilters, UseGuards, Request } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LoggingInterception } from './app.logging.interception';
 import { AppAgeValidationPipe } from './app.ageValidationPipe.pipe';
@@ -9,6 +9,7 @@ import { LoginDto } from './interfaces/dto/login.dto';
 import { ClValidationPipe } from './validation/cl.validation';
 import { HttpExceptionFilter } from './filters/http.exception.filter';
 import { DailyGuard } from './daily.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 //@UseInterceptors(LoggingInterception)
 //@UsePipes(ParseIntPipe, AppAgeValidationPipe)
@@ -50,6 +51,7 @@ export class AppController {
   login(@Body() body: LoginDto){
     return body;
   }
+
 
 }
 

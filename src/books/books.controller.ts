@@ -1,9 +1,9 @@
 import { Controller, Get, Body, Put, Param, Delete, Post} from "@nestjs/common";
 import { BooksService } from "./books.service";
-import { CreateBookDto } from "./interfaces/dto/create-book";
-import { UpdateBookDto } from "./interfaces/dto/update-book";
-import { BookDocument } from "./schemas/book.schema";
-import { IParamId } from "./interfaces/param-id";
+import { CreateBookDto } from "../interfaces/dto/create-book";
+import { UpdateBookDto } from "../interfaces/dto/update-book";
+import { BookDocument } from "../interfaces/schemas/book.schema";
+import { IParamId } from "../interfaces/param-id";
 
 
 @Controller('books') 
