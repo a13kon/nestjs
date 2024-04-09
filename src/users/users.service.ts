@@ -15,7 +15,7 @@ export class UsersService {
 
     singup(data: SignupDto): Promise<UserDocument> {
         const user = new this.UserModel(data);
-        
+
         return user.save();
     }
 
