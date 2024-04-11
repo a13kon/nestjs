@@ -4,6 +4,7 @@ import { UsersService } from "./users.service";
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, UserSchema } from "../interfaces/schemas/users.schema";
 import { JwtModule } from '@nestjs/jwt';
+import { jwtSecretKey } from "src/constants";
 
 
 
@@ -14,8 +15,8 @@ import { JwtModule } from '@nestjs/jwt';
             {name: User.name, schema: UserSchema}
         ]), 
         JwtModule.register({
-            secret: '1',
-            signOptions: { expiresIn: '60s' },
+            secret: jwtSecretKey,
+            signOptions: { expiresIn: '10m' },
           })
         
     ],

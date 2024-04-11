@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { SignupDto } from "../interfaces/dto/signup.dto";
 import { InjectConnection, InjectModel } from "@nestjs/mongoose";
 import { User, UserDocument } from "../interfaces/schemas/users.schema";
 import { Connection, Model } from "mongoose";
 import { JwtService } from '@nestjs/jwt';
+import { SigninDto } from "src/interfaces/dto/signin.dto";
 
 @Injectable()
 export class UsersService {
@@ -18,6 +19,24 @@ export class UsersService {
         const user = new this.UserModel(data);
 
         return user.save();
+    }
+
+    async signin(data: SigninDto) {
+        const user = await this.UserModel.findOne(
+            {email:data.email}
+        )
+        if (user && user.password == data.password) {
+            const { _id } = user._id;
+            const token = this.jwtService.sign({id: user._id});
+            console.log(_id, token)
+            return token
+        }
+        else
+        {
+            throw new UnauthorizedException('Vrong data!');
+        }
+        
+        
     }
 
     async findOne(username: string): Promise<UserDocument> {
