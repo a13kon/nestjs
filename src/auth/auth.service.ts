@@ -15,5 +15,19 @@ export class AuthService {
             return result;
         }
         return null;
+
+        
  }
+ 
+ async validateUserById(id: string): Promise<any> {
+      
+    const user = await this.userService.findOne(id);
+
+    if (user) {
+        
+        const { ...result } = user;
+        return result;
+    }
+    return null;
+}
 }
