@@ -26,9 +26,9 @@ export class UsersService {
             {email:data.email}
         )
         if (user && user.password == data.password) {
-            const { _id } = user._id;
+    
             const token = this.jwtService.sign({id: user._id});
-            console.log(_id, token)
+            console.log(user._id, token)
             return token
         }
         else
@@ -39,9 +39,9 @@ export class UsersService {
         
     }
 
-    async findOne(username: string): Promise<UserDocument> {
+    async findOne(id: string): Promise<UserDocument> {
         return this.UserModel.findOne(
-            { email: username }
+            { _id: id }
         )
     }
 
