@@ -28,7 +28,6 @@ export class UsersService {
         if (user && user.password == data.password) {
     
             const token = this.jwtService.sign({id: user._id});
-            console.log(user._id, token)
             return token
         }
         else
