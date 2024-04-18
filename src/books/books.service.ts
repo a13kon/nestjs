@@ -36,7 +36,7 @@ export class BooksService {
                 data,
             );
         }
-
+        
         public delete(id: string): Promise<BookDocument> {
             return this.BookModel.findByIdAndDelete(
                 {_id: id}
